@@ -7,12 +7,18 @@ import { api } from "@/convex/_generated/api";
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 const liveblocks = new Liveblocks({
-  secret: process.env.LIVEBLOCKS_SECRET_KEY!,
+  secret:
+    "sk_dev_udRrSYI7yYnG1R8hTE_XBUD-RX9jM2jE8xm22GQ2wc0nwDK0Deh8FMXXmw0ldioL",
 });
 
 export async function POST(request: Request) {
   const authorization = await auth();
   const user = await currentUser();
+
+  console.log("AUTH_INFO", {
+    authorization,
+    user,
+  });
 
   if (!authorization || !user) {
     return new Response("Unauthorized", { status: 403 });
