@@ -1,9 +1,10 @@
 "use client";
 
-import { useSelectionBounds } from "@/hooks/use-selection-bounds";
-import { useSelf, useStorage } from "@/liveblocks.config";
-import { LayerType, Side, XYWH } from "@/types/canvas";
 import { memo } from "react";
+import { useSelf, useStorage } from "@/liveblocks.config";
+
+import { LayerType, Side, XYWH } from "@/types/canvas";
+import { useSelectionBounds } from "@/hooks/use-selection-bounds";
 
 interface SelectionBoxProps {
   onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
@@ -59,7 +60,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Top + Side.Left, bounds);
             }}
           />
           <rect
@@ -72,14 +73,14 @@ export const SelectionBox = memo(({
               height: `${HANDLE_WIDTH}px`,
               transform: `
                 translate(
-                  ${bounds.x + bounds.width / 2 - HANDLE_WIDTH}px, 
+                  ${bounds.x + bounds.width / 2 - HANDLE_WIDTH / 2}px, 
                   ${bounds.y - HANDLE_WIDTH / 2}px
                 )
               `
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Top, bounds);
             }}
           />
           <rect
@@ -99,7 +100,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Top + Side.Right, bounds);
             }}
           />
           <rect
@@ -119,7 +120,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Right, bounds);
             }}
           />
           <rect
@@ -127,7 +128,7 @@ export const SelectionBox = memo(({
             x={0}
             y={0}
             style={{
-              cursor: "nwes-resize",
+              cursor: "nwse-resize",
               width: `${HANDLE_WIDTH}px`,
               height: `${HANDLE_WIDTH}px`,
               transform: `
@@ -139,7 +140,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Bottom + Side.Right, bounds);
             }}
           />
           <rect
@@ -159,7 +160,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Bottom, bounds);
             }}
           />
           <rect
@@ -179,7 +180,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Bottom + Side.Left, bounds);
             }}
           />
           <rect
@@ -199,7 +200,7 @@ export const SelectionBox = memo(({
             }}
             onPointerDown={(e) => {
               e.stopPropagation();
-              //TODO: Add resize handler
+              onResizeHandlePointerDown(Side.Left, bounds);
             }}
           />
         </>

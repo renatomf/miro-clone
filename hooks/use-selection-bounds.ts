@@ -1,7 +1,7 @@
 import { shallow } from "@liveblocks/react";
-import { useSelf, useStorage } from "@/liveblocks.config";
 
 import { Layer, XYWH } from "@/types/canvas";
+import { useSelf, useStorage } from "@/liveblocks.config";
 
 const boundingBox = (layers: Layer[]): XYWH | null => {
   const first = layers[0];
